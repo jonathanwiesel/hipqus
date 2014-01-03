@@ -1,9 +1,26 @@
 {
-  "name": "disqus-hipchat",
+  "name": "Diqus-HipChat_Notifier",
+  "description": "New disqus' comment notifier for HipChat",
   "version": "0.0.1",
+  "author": {
+    "name": "Jonathan Wiesel",
+    "email": "jonathanwiesel@gmail.com",
+    "url": "http://github.com/jonathanwiesel"
+  },
+  "keywords": [
+    "disqus",
+    "hipchat",
+    "comment",
+    "api",
+    "notify"
+  ],
   "scripts": {
     "start": "node app.js"
   },
+  "licenses": [{
+      "type": "MIT",
+      "url": "http://www.opensource.org/licenses/mit-license.php"
+  }],
   "engines": {
     "node": "0.10.24",
     "npm":  "1.3.21"

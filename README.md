@@ -1,4 +1,4 @@
-#diqus-hipchat
+#Diqus-HipChat Notifier
 ***
 This simple application monitors a Disqus forum and sends a notification to a HipChat room when a new comment is made in said forum. Can be easily deployed to Heroku. You only need to set the following enviroment variables:
 
@@ -13,4 +13,11 @@ HIPCHAT_ROOM_ID=123456
 
 The server will request every 10 seconds the comments from the forum that have been created since the last cron run. You could change the interval to a smaller value but remember that Disqus API is limited to 1000 requests per hour.
 
+***
+
+##Notes
+This application was built using:
+* [node-disqus](https://github.com/hay/node-disqus)
+* [node-hipchat](https://github.com/nkohari/node-hipchat)
+* [cron](https://github.com/ncb000gt/node-cron)
 
