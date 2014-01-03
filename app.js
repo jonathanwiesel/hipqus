@@ -22,10 +22,7 @@ new cronJob('*/10 * * * * *', function (){
 
         if(data.error) {
             console.log('Something went wrong...');
-            console.log(process.env.DISQUS_API_KEY);
-            console.log(process.env.DISQUS_API_SECRET);
-            console.log(process.env.DISQUS_COMMENT_LIMIT);
-            console.log(process.env.HIPCHAT_ROOM_ID);
+            console.log(data);
         }else{
 
             hipchat.sendComment(lastTimestamp, data);

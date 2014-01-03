@@ -29,6 +29,7 @@ var sendComment = function (lastTimestamp, data) {
             });
 
         }else{
+            console.log('Nothing new to send at ' + lastTimestamp);
             break;
         }
     }
