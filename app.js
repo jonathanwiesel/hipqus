@@ -10,13 +10,15 @@ var disqus = new Disqus({
 
 var disqus_options = {
     forum: process.env.DISQUS_FORUM,
-    limit: process.env.DISQUS_COMMENT_LIMIT,
-    related: 'thread'
+    related: 'thread',
+    order: 'asc'
 };
 
-var lastTimestamp = new Date();
-
 new cronJob('*/10 * * * * *', function (){
+
+    var lastTimestamp = new Date();
+
+    disqus_options.since = lastTimestamp.toISOString();
 
     disqus.request('posts/list', disqus_options, function(data) {
 
@@ -24,10 +26,7 @@ new cronJob('*/10 * * * * *', function (){
             console.log('Something went wrong...');
             console.log(data);
         }else{
-
-            hipchat.sendComment(lastTimestamp, data);
-
-            lastTimestamp = new Date();
+            hipchat.sendComment(data);
         }
     });
 

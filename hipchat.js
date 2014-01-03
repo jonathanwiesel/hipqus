@@ -1,16 +1,15 @@
 var Hipchat = require('node-hipchat');
 var hip = new Hipchat(process.env.HIPCHAT_API_KEY);
 
-var sendComment = function (lastTimestamp, data) {
+var sendComment = function (data) {
 
     var response = JSON.parse(data);
+    var responseLength = response.response.length;
+    if(responseLength > 0){
+        for(var i=0; i < responseLength; i++){
 
-    for(var i=0; i < response.response.length; i++){
-
-        var comment = response.response[i];
-        var commentDate = new Date(comment.createdAt);
-
-        if(comment.createdAt > lastTimestamp){
+            var comment = response.response[i];
+            var commentDate = new Date(comment.createdAt);
 
             var url = comment.thread.link + '#comment-' + comment.id;
             var message = '<a href="'+ url +'"> A new Disqus comment has being registered.</a><br>';
@@ -27,11 +26,9 @@ var sendComment = function (lastTimestamp, data) {
             hip.postMessage(params, function(data) {
                 console.log('New Disqus comment!. Message sent to Hipchat room');
             });
-
-        }else{
-            console.log('Nothing new to send at ' + lastTimestamp);
-            break;
         }
+    }else{
+        console.log('Nothing new to send');
     }
 }
 
