@@ -9,9 +9,13 @@ DISQUS_API_ACCESS_TOKEN=api_access_token
 DISQUS_FORUM=your_disqus_forum
 HIPCHAT_API_KEY=hipchat_api_key
 HIPCHAT_ROOM_ID=123456
+HIPCHAT_ROOM_MENTION=JonathanWiesel-here-all-... # optional
 ```
 
 The server will request every 10 seconds the comments from the forum that have been created since the last cron run. You could change the interval to a smaller value but remember that Disqus API is limited to 1000 requests per hour.
+
+The `HIPCHAT_ROOM_MENTION` variable is **optional**, it will send an additional message to the channel mentioning those specified (separated by a dash). Remember `all` will mention every member on the channel and `here` will mention every available room members.
+(It cannot be sent along the original message because the first one is HTML-formated and the HipChat API states that to use @mentions the message needs to be text-formated).
 
 ***
 
