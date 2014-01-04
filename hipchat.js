@@ -1,7 +1,7 @@
 var Hipchat = require('node-hipchat');
 var hip = new Hipchat(process.env.HIPCHAT_API_KEY);
 
-var sendComment = function (data, callback) {
+var sendComment = function (data) {
 
     var response = JSON.parse(data);
     var responseLength = response.response.length;
@@ -47,8 +47,6 @@ var sendComment = function (data, callback) {
     }else{
         console.log('Nothing new to send');
     }
-
-    callback();
 }
 
 
