@@ -17,32 +17,41 @@ var sendComment = function (data) {
             message += ' on entry <a href="'+ comment.thread.link +'">' +  comment.thread.title + '</a>:</p><br>';
             message += comment.message;
             var params = {
-                room: process.env.HIPCHAT_ROOM_ID,
                 from: 'Disqus',
                 message: message,
                 color: 'green'
             };
 
-            hip.postMessage(params, function(data) {
-                console.log('New Disqus comment!. Message sent to Hipchat room.');
-            });
+            var rooms = process.env.HIPCHAT_ROOM_ID.split('-');
+            for(var k=0; k < rooms.length; k++){
 
-            if(process.env.HIPCHAT_ROOM_MENTION){
-
-                var mentionsVar = process.env.HIPCHAT_ROOM_MENTION.split('-');
-                var mentions = '';
-                for(var j=0; j < mentionsVar.length; j++){
-                    mentions += ' @' + mentionsVar[j];
-                }
-                var mentionMessage = 'Alerting' + mentions + ' about new comment.';
-
-                params.message = mentionMessage;
-                params.message_format = 'text';
+                params.room = rooms[k];
 
                 hip.postMessage(params, function(data) {
-                    console.log('Mentioning alert sent.');
+                    console.log('New Disqus comment!. Message sent to Hipchat room.');
                 });
             }
+
+
+            if(process.env.HIPCHAT_ROOM_MENTION){
+                for(var k=0; k < rooms.length; k++){
+                    var mentionsVar = process.env.HIPCHAT_ROOM_MENTION.split('-');
+                    var mentions = '';
+                    for(var j=0; j < mentionsVar.length; j++){
+                        mentions += ' @' + mentionsVar[j];
+                    }
+                    var mentionMessage = 'Alerting' + mentions + ' about new comment.';
+
+                    params.message = mentionMessage;
+                    params.message_format = 'text';
+                    params.room = rooms[k];
+
+                    hip.postMessage(params, function(data) {
+                        console.log('Mentioning alert sent.');
+                    });
+                }
+            }
+
         }
     }else{
         console.log('Nothing new to send');

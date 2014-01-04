@@ -8,8 +8,8 @@ DISQUS_API_SECRET=api_secret
 DISQUS_API_ACCESS_TOKEN=api_access_token
 DISQUS_FORUM=your_disqus_forum
 HIPCHAT_API_KEY=hipchat_api_key
-HIPCHAT_ROOM_ID=123456
-HIPCHAT_ROOM_MENTION=JonathanWiesel-here-all-... # optional
+HIPCHAT_ROOM_ID=123456-123457                       # separate multiple rooms by a dash (-)
+HIPCHAT_ROOM_MENTION=JonathanWiesel-here-all-...    # optional
 ```
 
 The server will request every 10 seconds the comments from the forum that have been created since the last cron run. You could change the interval to a smaller value but remember that Disqus API is limited to 1000 requests per hour.
