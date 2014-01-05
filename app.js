@@ -11,23 +11,42 @@ var disqus = new Disqus({
 var disqus_options = {
     forum: process.env.DISQUS_FORUM,
     related: 'thread',
-    order: 'asc'
+    limit: 10
 };
 
-var lastTimestamp = new Date();
+var lastTimestamp = null;
 
 new cronJob('*/10 * * * * *', function (){
 
-    disqus_options.since = lastTimestamp.toISOString();
-
     disqus.request('posts/list', disqus_options, function(data) {
 
-        lastTimestamp = new Date();
-        if(data.error) {
+        if(data.error){
             console.log('Something went wrong...');
             console.log(data);
         }else{
-            hipchat.sendComment(data);
+            var response = JSON.parse(data).response;
+
+            if(!lastTimestamp){
+                // initializing lastTimestamp with most recent comment date
+                lastTimestamp = new Date(response[0].createdAt);
+            }else{
+                var mostRecentTimestamp = null;
+                for(var i=0; i < response.length; i++){
+                    var postDate = response[i].createdAt;
+                    if(postDate > lastTimestamp){
+                        hipchat.buildMessage(response[i]);
+                        if(!mostRecentTimestamp){
+                            mostRecentTimestamp = postDate;
+                        }
+                    }else{
+                        console.log('Nothing new to send');
+                        break;
+                    }
+                }
+                if(mostRecentTimestamp){
+                    lastTimestamp = mostRecentTimestamp;
+                }
+            }
         }
     });
 
