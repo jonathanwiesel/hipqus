@@ -32,14 +32,14 @@ new cronJob('*/10 * * * * *', function (){
             }else{
                 var mostRecentTimestamp = null;
                 for(var i=0; i < response.length; i++){
-                    var postDate = response[i].createdAt;
+                    var postDate = new Date(response[i].createdAt);
                     if(postDate > lastTimestamp){
                         hipchat.buildMessage(response[i]);
                         if(!mostRecentTimestamp){
                             mostRecentTimestamp = postDate;
                         }
                     }else{
-                        console.log('Nothing new to send');
+                        console.log('Nothing new to send. Last comment timestamp: ' + lastTimestamp.toISOString());
                         break;
                     }
                 }

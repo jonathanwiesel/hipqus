@@ -1,20 +1,6 @@
 var Hipchat = require('node-hipchat');
 var hip = new Hipchat(process.env.HIPCHAT_API_KEY);
 
-// var processResponse = function (data) {
-
-//     var response = JSON.parse(data);
-//     var responseLength = response.response.length;
-//     if(responseLength > 0){
-//         for(var i=0; i < responseLength; i++){
-//             buildMessage(response.response[i]);
-//         }
-//     }else{
-//         console.log('Nothing new to send');
-//     }
-// }
-
-
 var buildMessage = function (comment){
 
     var commentDate = new Date(comment.createdAt);
