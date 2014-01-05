@@ -20,7 +20,8 @@ function sendMessage(message){
     var params = {
         from: 'Disqus',
         message: message,
-        color: 'green'
+        color: 'green',
+        notify: 1
     };
 
     var rooms = process.env.HIPCHAT_ROOM_ID.split('-');
