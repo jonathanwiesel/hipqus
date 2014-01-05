@@ -34,12 +34,12 @@ function sendMessage(message){
     }
 
     if(process.env.HIPCHAT_ROOM_MENTION){
-        sendMetions(params);
+        sendMetions(rooms, params);
     }
 }
 
 
-function sendMetions(params){
+function sendMetions(rooms, params){
     for(var k=0; k < rooms.length; k++){
         var mentionsVar = process.env.HIPCHAT_ROOM_MENTION.split('-');
         var mentions = '';
