@@ -13,12 +13,6 @@ HIPCHAT_ROOM_ID=123456-123457                       # separate multiple rooms by
 HIPCHAT_ROOM_MENTION=JonathanWiesel-here-all-...    # optional
 ```
 
-And install dependent modules:
-
-```sh
-$ npm install
-```
-
 The server will request every 10 seconds the 10 most recent comments (according to what's stated in the `DISQUS_COMMENT_COUNT` variable). If you consider that your forum could recieve more than 10 new comments in a 10 second window, feel free to increase that variable's number.
 
 The `HIPCHAT_ROOM_MENTION` variable is **optional**, it will send an additional message to the channel mentioning those specified (separated by a dash). Remember `all` will mention every member on the channel and `here` will mention every available room members.
