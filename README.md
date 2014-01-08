@@ -20,7 +20,7 @@ The `HIPCHAT_ROOM_MENTION` variable is **optional**, it will send an additional 
 
 You can get your `HIPCHAT_API_TOKEN` from:
 
-`Group Admin tab -> API -> Create new **notification** token`
+Group Admin tab -> API -> Create new **notification** token
 
 ***
 
