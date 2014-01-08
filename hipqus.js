@@ -1,5 +1,5 @@
 var Hipchat     =   require('node-hipchat'),
-    hip         =   new Hipchat(process.env.HIPCHAT_API_KEY),
+    hip         =   new Hipchat(process.env.HIPCHAT_API_TOKEN),
     rooms       =   process.env.HIPCHAT_ROOM_ID.split('-')
     params      =   { from: 'Disqus', color: 'green', notify: 1 };
 

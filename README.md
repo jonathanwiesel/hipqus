@@ -8,7 +8,7 @@ DISQUS_API_SECRET=api_secret
 DISQUS_API_ACCESS_TOKEN=api_access_token
 DISQUS_FORUM=your_disqus_forum
 DISQUS_COMMENT_COUNT=10
-HIPCHAT_API_KEY=hipchat_api_key
+HIPCHAT_API_TOKEN=hipchat_api_token
 HIPCHAT_ROOM_ID=123456-123457                       # separate multiple rooms by a dash (-)
 HIPCHAT_ROOM_MENTION=JonathanWiesel-here-all-...    # optional
 ```
