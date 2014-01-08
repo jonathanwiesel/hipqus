@@ -18,6 +18,10 @@ The server will request every 10 seconds the 10 most recent comments (according 
 The `HIPCHAT_ROOM_MENTION` variable is **optional**, it will send an additional message to the channel mentioning those specified (separated by a dash). Remember `all` will mention every member on the channel and `here` will mention every available room members.
 (It cannot be sent along the original message because the first one is HTML-formated and the HipChat API states that to use @mentions the message needs to be text-formated).
 
+You can get your `HIPCHAT_API_TOKEN` from:
+
+`Group Admin tab -> API -> Create new **notification** token`
+
 ***
 
 ##Notes
