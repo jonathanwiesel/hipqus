@@ -1,24 +1,12 @@
-var Disqus = require('disqus'),
-    cronJob = require('cron').CronJob,
-    hipchat = require('./hipchat.js');
-
-var disqus = new Disqus({
-    api_secret : process.env.DISQUS_API_SECRET,
-    api_key : process.env.DISQUS_API_KEY,
-    access_token : process.env.DISQUS_API_ACCESS_TOKEN
-});
-
-var disqus_options = {
-    forum: process.env.DISQUS_FORUM,
-    related: 'thread',
-    limit: 10
-};
+var cronJob = require('cron').CronJob,
+    hipqus = require('./hipqus.js'),
+    D  = require('./disqus-config.js');
 
 var lastTimestamp = null;
 
 new cronJob('*/10 * * * * *', function (){
 
-    disqus.request('posts/list', disqus_options, function(data) {
+    D.disqus.request('posts/list', D.disqus_options, function(data) {
 
         if(data.error){
             console.log('Something went wrong...');
@@ -34,7 +22,7 @@ new cronJob('*/10 * * * * *', function (){
                 for(var i=0; i < response.length; i++){
                     var postDate = new Date(response[i].createdAt);
                     if(postDate > lastTimestamp){
-                        hipchat.buildMessage(response[i]);
+                        hipqus.buildMessage(response[i]);
                         if(!mostRecentTimestamp){
                             mostRecentTimestamp = postDate;
                         }

@@ -1,5 +1,7 @@
-var Hipchat = require('node-hipchat');
-var hip = new Hipchat(process.env.HIPCHAT_API_KEY);
+var Hipchat     =   require('node-hipchat'),
+    hip         =   new Hipchat(process.env.HIPCHAT_API_KEY),
+    rooms       =   process.env.HIPCHAT_ROOM_ID.split('-')
+    params      =   { from: 'Disqus', color: 'green', notify: 1 };
 
 var buildMessage = function (comment){
 
@@ -17,14 +19,9 @@ var buildMessage = function (comment){
 
 function sendMessage(message){
 
-    var params = {
-        from: 'Disqus',
-        message: message,
-        color: 'green',
-        notify: 1
-    };
+    params.message = message;
+    params.message_format = 'html';
 
-    var rooms = process.env.HIPCHAT_ROOM_ID.split('-');
     for(var k=0; k < rooms.length; k++){
 
         params.room = rooms[k];
@@ -35,12 +32,12 @@ function sendMessage(message){
     }
 
     if(process.env.HIPCHAT_ROOM_MENTION){
-        sendMetions(rooms, params);
+        sendMetions();
     }
 }
 
 
-function sendMetions(rooms, params){
+function sendMetions(){
     for(var k=0; k < rooms.length; k++){
         var mentionsVar = process.env.HIPCHAT_ROOM_MENTION.split('-');
         var mentions = '';
