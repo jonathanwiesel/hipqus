@@ -1,5 +1,7 @@
 #hipqus
 ***
+> This application uses the Hipchat API v1, I also have it using the API v2, you can check out [hipqus-v2](https://github.com/jonathanwiesel/hipqus-v2) 
+
 This simple application monitors a Disqus forum and sends a notification to a HipChat room when a new comment is made in said forum. Can be easily deployed to Heroku. You only need to set the following enviroment variables:
 
 ```
